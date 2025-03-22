@@ -42,8 +42,8 @@
 
 <div class="card">
 	<div class="card-header">
-		<h2 class="section-title">Twitter / X / Bsky</h2>
-		<h4 class="section-subtitle">do people still use this?</h4>
+		<h2 class="section-title">Socials</h2>
+		<h4 class="section-subtitle">What do the people have to say?</h4>
 	</div>
 
 	<div class="card-body">
@@ -87,6 +87,11 @@
 
 		<!-- Recent Posts -->
 		<h3 class="section-title text-lg mb-4">Recent Posts</h3>
+		<div class="flex justify-center mb-4">
+			<button on:click={loadBlueskyData} disabled={loading} class="refresh-button">
+				{loading ? 'Loading...' : 'Refresh'}
+			</button>
+		</div>
 		<div class="scrollable-container">
 			{#each posts as post (post.id)}
 				<div class="item">
@@ -108,12 +113,6 @@
 				</div>
 			{/each}
 		</div>
-
-		<div class="flex justify-center mt-4">
-			<button on:click={loadBlueskyData} disabled={loading} class="refresh-button">
-				{loading ? 'Loading...' : 'Refresh'}
-			</button>
-		</div>
 	</div>
 </div>
 
@@ -126,8 +125,14 @@
 		margin-bottom: 20px;
 		background-color: #121212;
 		border-radius: 8px;
-		padding: 20px;
 		min-height: 200px;
+		padding-bottom: 2rem;
+	}
+
+	@media (min-width: 767px) {
+		.word-web-container {
+			padding: 2rem;
+		}
 	}
 
 	.word-web {

@@ -6,7 +6,7 @@
 }
 
 .card-header {
-    margin-bottom: 1rem;
+    padding-bottom: 20px;
 }
 
 .section-title {
@@ -21,6 +21,16 @@
     font-weight: 400;
     font-size: 1rem;
     margin-top: 0.25rem;
+}
+
+@media (max-width: 767px) {
+    .card {
+        padding: 15px 10px;
+    }
+
+    .card-header {
+        padding-bottom: 15px;
+    }
 }
 
 /* Common button styles */

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import BlueskyFeed from './BlueskyFeed.svelte';
+	import SocialFeed from './SocialFeed.svelte';
 	import NewsSummary from './NewsSummary.svelte';
 	import UptimeMonitor from './UptimeMonitor.svelte';
 
@@ -24,9 +24,6 @@
 
 	<div class="dashboard-grid">
 		<div class="dashboard-column">
-			<BlueskyFeed />
-		</div>
-		<div class="dashboard-column">
 			<UptimeMonitor
 				{domain}
 				interval="seconds"
@@ -40,6 +37,9 @@
 				subtitle="really hope you're working on this..."
 			/>
 			<NewsSummary />
+		</div>
+		<div class="dashboard-column">
+			<SocialFeed />
 		</div>
 	</div>
 </div>
@@ -73,6 +73,8 @@
 		justify-content: left;
 		gap: 4rem;
 		margin-bottom: 2rem;
+		padding: 0 2rem;
+		padding-top: 2rem;
 	}
 
 	.logo-text {
@@ -99,7 +101,7 @@
 
 	@media (min-width: 768px) {
 		.dashboard-grid {
-			grid-template-columns: 2fr 3fr;
+			grid-template-columns: 4fr 3fr;
 		}
 	}
 
@@ -111,5 +113,43 @@
 
 	:global(.accent-color) {
 		color: #f27935;
+	}
+
+	@media (max-width: 767px) {
+		.dashboard {
+			padding: 1rem;
+		}
+
+		.dashboard-header {
+			margin-bottom: 1rem;
+		}
+
+		.logo-container {
+			flex-direction: column;
+			gap: 0.5rem;
+			margin-bottom: 1rem;
+		}
+
+		.logo-text {
+			font-size: 2.5rem;
+		}
+
+		.tagline {
+			font-size: 1rem;
+			margin-top: 0;
+		}
+
+		.dashboard-grid {
+			gap: 0.5rem;
+		}
+
+		:global(.card) {
+			border-radius: 0;
+			margin-bottom: 0.5rem;
+		}
+
+		:global(.card:last-child) {
+			margin-bottom: 0;
+		}
 	}
 </style>
