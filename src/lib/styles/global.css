@@ -76,11 +76,11 @@ button:disabled {
 
 /* Status Styles */
 .status-up {
-    border: 1px solid #f27935;
+    border: 2px solid #f27935;
 }
 
 .status-down {
-    border: 1px solid #dc4c64;
+    border: 2px solid #dc4c64;
 }
 
 /* Loading and Error States */
