@@ -73,7 +73,7 @@
 						</div>
 						<p class="text-secondary mb-2">{article.description}</p>
 						<div class="flex justify-between items-center text-muted text-sm">
-							<span>{article.publishedAt}</span>
+							<span>{new Date(article.publishedAt).toLocaleString()}</span>
 							{#if article.url}
 								<a
 									href={article.url}

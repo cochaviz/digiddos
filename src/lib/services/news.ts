@@ -1,12 +1,10 @@
-import axios from 'axios';
-
-type Article = {
+export type Article = {
     id: string;
     title: string;
     description: string;
     url: string;
     source: string;
-    publishedAt: string;
+    publishedAt: Date;
 }
 
 
