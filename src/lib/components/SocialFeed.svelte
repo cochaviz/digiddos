@@ -6,7 +6,6 @@
 		type BlueskyPost,
 		type WordFrequency
 	} from '../services/social';
-	import '../styles/shared.css';
 
 	let posts: BlueskyPost[] = [];
 	let wordFrequencies: WordFrequency[] = [];

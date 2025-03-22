@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { fetchNewsArticles, type Article } from '../services/news';
-	import '../styles/shared.css';
 
 	// Type definitions
 	let articles: Article[] = [];

@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
 	import { getUptimeStatus, SECONDS_10, MINUTES_10, type UptimeCheck } from '../services/uptime';
-	import '../styles/shared.css';
 
 	export let domain: string = 'digid.nl';
 	export let interval: 'seconds' | 'minutes' = 'minutes';

@@ -49,18 +49,6 @@
 		max-width: 1200px;
 		margin: 0 auto;
 		padding: 2rem;
-		font-family:
-			system-ui,
-			-apple-system,
-			BlinkMacSystemFont,
-			'Segoe UI',
-			Roboto,
-			Oxygen,
-			Ubuntu,
-			Cantarell,
-			'Open Sans',
-			'Helvetica Neue',
-			sans-serif;
 	}
 
 	.dashboard-header {
@@ -137,19 +125,6 @@
 		.tagline {
 			font-size: 1rem;
 			margin-top: 0;
-		}
-
-		.dashboard-grid {
-			gap: 0.5rem;
-		}
-
-		:global(.card) {
-			border-radius: 0;
-			margin-bottom: 0.5rem;
-		}
-
-		:global(.card:last-child) {
-			margin-bottom: 0;
 		}
 	}
 </style>

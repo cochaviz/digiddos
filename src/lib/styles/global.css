@@ -1,4 +1,4 @@
-/* Reset */
+/* Reset and Base Styles */
 * {
     margin: 0;
     padding: 0;
@@ -12,6 +12,7 @@ body {
     line-height: 1.6;
 }
 
+/* Typography */
 h1,
 h2,
 h3,
@@ -27,6 +28,7 @@ p {
     margin-bottom: 1rem;
 }
 
+/* Links */
 a {
     color: #F27935;
     text-decoration: none;
@@ -36,6 +38,7 @@ a:hover {
     text-decoration: underline;
 }
 
+/* Buttons */
 button {
     cursor: pointer;
 }
@@ -45,7 +48,159 @@ button:disabled {
     opacity: 0.7;
 }
 
-/* Custom scrollbar */
+/* Card Styles */
+.card {
+    background-color: #121212;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.card-header {
+    padding-bottom: 30px;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #f27935;
+    margin: 0;
+}
+
+.section-subtitle {
+    color: #777;
+    font-weight: 400;
+    font-size: 1rem;
+    margin-top: 0.25rem;
+}
+
+/* Status Styles */
+.status-up {
+    border: 1px solid #f27935;
+}
+
+.status-down {
+    border: 1px solid #dc4c64;
+}
+
+/* Loading and Error States */
+.loading {
+    text-align: center;
+    padding: 20px;
+    color: #888;
+}
+
+.error {
+    background-color: rgba(220, 76, 100, 0.2);
+    color: #ff6b7d;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+/* Container Styles */
+.scrollable-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Item Styles */
+.item {
+    background-color: #121212;
+    border-radius: 8px;
+    padding: 15px;
+    transition: background-color 0.2s;
+}
+
+.item:hover {
+    background-color: #1a1a1a;
+}
+
+/* Badge Styles */
+.badge {
+    height: min-content;
+    background-color: rgba(242, 121, 53, 0.2);
+    color: #f27935;
+    font-size: 0.75rem;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+/* Text Styles */
+.text-primary {
+    color: #ffffff;
+}
+
+.text-secondary {
+    color: #ccc;
+}
+
+.text-muted {
+    color: #777;
+}
+
+.text-accent {
+    color: #f27935;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* Layout Utilities */
+.flex {
+    display: flex;
+}
+
+.flex-col {
+    flex-direction: column;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.gap-2 {
+    gap: 0.5rem;
+}
+
+.gap-4 {
+    gap: 1rem;
+}
+
+.mb-2 {
+    margin-bottom: 0.5rem;
+}
+
+.mb-4 {
+    margin-bottom: 1rem;
+}
+
+.mt-2 {
+    margin-top: 0.5rem;
+}
+
+.mt-4 {
+    margin-top: 1rem;
+}
+
+/* Scrollbar Styles */
 ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
@@ -84,55 +239,13 @@ button:disabled {
     transition: opacity 200ms;
 }
 
-/* Utility classes */
-.text-center {
-    text-align: center;
-}
+/* Mobile Styles */
+@media (max-width: 767px) {
+    .card {
+        padding: 20px;
+    }
 
-.container {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1rem;
-}
-
-/* Custom Accent Color */
-.accent-color {
-    color: #F27935;
-}
-
-.accent-bg {
-    background-color: #F27935;
-}
-
-/* Status Colors */
-.status-up {
-    color: #FFFFFF;
-    background-color: #F27935;
-}
-
-.status-down {
-    color: #FFFFFF;
-    background-color: #DC4C64;
-}
-
-/* Card Styles */
-.card {
-    background-color: #121212;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-.card-header {
-    padding: 16px;
-}
-
-.card-body {
-    padding: 16px;
-}
-
-.card-footer {
-    padding: 16px;
-    border-top: 1px solid #333333;
+    .card-header {
+        padding-bottom: 20px;
+    }
 }
