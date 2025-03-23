@@ -16,11 +16,27 @@ export interface WordFrequency {
     weight: number; // For visualization sizing
 }
 
+const BLUESKY_SERVICE = "https://public.api.bsky.app/xrpc";
+const LIMIT = 50;
+
 // Function to fetch posts from Bluesky
 export async function fetchSocialPosts(): Promise<BlueskyPost[]> {
     try {
-        const response = await axios.get('/api/social');
-        return response.data.posts;
+        const response = await axios.get(`${BLUESKY_SERVICE}/app.bsky.feed.searchPosts`, {
+            params: {
+                limit: LIMIT,
+                q: 'digid'
+            }
+        });
+
+        return response.data?.posts?.map((post: any) => ({
+            id: post.uri,
+            author: post.author?.displayName || 'Unknown',
+            authorHandle: post.author?.handle || 'unknown',
+            content: post.record?.text || '',
+            createdAt: new Date(post.record?.createdAt).toLocaleString(),
+            avatar: post.author?.avatar || ''
+        })) || [];
     } catch (error) {
         console.error('Error fetching Bluesky posts:', error);
         return [];
