@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const DIGID_DOMAIN = 'digid.nl';
 const MIN_CHECK_INTERVAL = 10000; // 10 seconds in milliseconds
-const MAX_STORED_CHECKS = 600; // 10 minutes worth of checks (one per second)
+const MAX_CHECK_INTERVAL = 600000; // 10 minutes in milliseconds
 
 // In-memory storage for checks and last check time
 let lastCheckTime = 0;
@@ -30,63 +30,42 @@ export const GET: RequestHandler = async ({ url }) => {
         });
     }
 
-    try {
-        const startTime = currentTime;
-        const response = await axios.get(`https://${DIGID_DOMAIN}`, {
-            timeout: 5000,
-            validateStatus: (status) => status < 500 // Consider any status < 500 as "up"
-        });
-        const endTime = Date.now();
-        const responseTime = endTime - startTime;
+    const startTime = Date.now();
+    const response = await axios.get(`https://${DIGID_DOMAIN}`, {
+        timeout: 5000,
+        validateStatus: (status) => status < 500 // Consider any status < 500 as "up"
+    }).catch((error) => {
+        console.log(`Error raised while checking uptime for ${DIGID_DOMAIN}:`, error);
+        return { status: 500, data: null };
+    });
+    const endTime = Date.now();
+    const responseTime = endTime - startTime;
 
-        const check = {
-            timestamp: new Date(),
-            status: response.status < 500 ? 'up' as const : 'down' as const,
-            responseTime: response.status < 500 ? responseTime : 0
-        };
+    const check = {
+        timestamp: new Date(),
+        status: response.status < 500 ? 'up' as const : 'down' as const,
+        responseTime: response.status < 500 ? responseTime : 0
+    };
 
-        // Update last check time
-        lastCheckTime = currentTime;
+    // Update last check time
+    lastCheckTime = currentTime;
 
-        // Add new check to the beginning of the array
-        storedChecks.unshift(check);
+    // Add new check to the beginning of the array
+    storedChecks.unshift(check);
 
-        // Keep only the last MAX_STORED_CHECKS checks
-        storedChecks = storedChecks.slice(0, MAX_STORED_CHECKS);
+    // Keep only the checks within the max check interval
+    storedChecks = storedChecks.filter(check => currentTime - check.timestamp.getTime() < MAX_CHECK_INTERVAL);
+    const windowChecks = storedChecks.filter(check => currentTime - check.timestamp.getTime() < timeWindow);
+    console.log(`Window checks: ${windowChecks.length}`);
 
-        const uptimeStatus = {
-            current: check.status,
-            lastChecked: check.timestamp,
-            responseTime: check.responseTime,
-            uptimePercentage: calculateUptimePercentage(storedChecks),
-            checks: storedChecks.slice(0, timeWindow / 1000)
-        };
+    const uptimeStatus = {
+        current: check.status,
+        lastChecked: check.timestamp,
+        responseTime: check.responseTime,
+        uptimePercentage: calculateUptimePercentage(windowChecks),
+    };
 
-        return json(uptimeStatus);
-    } catch (error) {
-        console.error(`Error checking uptime for ${DIGID_DOMAIN}:`, error);
-
-        // Even on error, we should update the last check time to prevent too frequent retries
-        lastCheckTime = currentTime;
-
-        const errorCheck = {
-            timestamp: new Date(),
-            status: 'down' as const,
-            responseTime: 0
-        };
-
-        // Add error check to storage
-        storedChecks.unshift(errorCheck);
-        storedChecks = storedChecks.slice(0, MAX_STORED_CHECKS);
-
-        return json({
-            current: 'down',
-            lastChecked: errorCheck.timestamp,
-            responseTime: 0,
-            uptimePercentage: calculateUptimePercentage(storedChecks),
-            checks: storedChecks.slice(0, timeWindow / 1000)
-        });
-    }
+    return json(uptimeStatus);
 };
 
 function calculateUptimePercentage(checks: any[]) {
