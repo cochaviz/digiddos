@@ -56,7 +56,6 @@ export const GET: RequestHandler = async ({ url }) => {
     // Keep only the checks within the max check interval
     storedChecks = storedChecks.filter(check => currentTime - check.timestamp.getTime() < MAX_CHECK_INTERVAL);
     const windowChecks = storedChecks.filter(check => currentTime - check.timestamp.getTime() < timeWindow);
-    console.log(`Window checks: ${windowChecks.length}`);
 
     const uptimeStatus = {
         current: check.status,
