@@ -16,7 +16,7 @@ export interface WordFrequency {
     weight: number; // For visualization sizing
 }
 
-const BLUESKY_SERVICE = "https://public.api.bsky.app/xrpc";
+const BLUESKY_SERVICE = "https://api.bsky.app/xrpc";
 const LIMIT = 50;
 
 // Function to fetch posts from Bluesky
